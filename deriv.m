@@ -1,11 +1,11 @@
 function v = deriv(f_left, f_c, f_right, type_left, type_c, type_right, h)
-% Paramètres : 
-%   f_xxx : la valeur de la fonction à dériver, à gauche, à droite, ...
+%ParamËtres : 
+%   f_xxx : la valeur de la fonction ? dÈriver, ? gauche, ? droite, ...
 %   type_xxx : le type de noeud : 0 = hors domaine de calcul, 
-%                                 1 = n?ud de calcul entouré de
-%                                     n?uds de calcul ou
+%                                 1 = núud de calcul entourÈ de
+%                                     núuds de calcul ou
 %                                     condition limite
-%                                 2 = n?ud condition limite de
+%                                 2 = núud condition limite de
 %                                     Dirichlet 
 %   h : pas spatial entre deux noeuds  
     
@@ -20,7 +20,7 @@ function v = deriv(f_left, f_c, f_right, type_left, type_c, type_right, h)
     
     
     %Noeud condition limite avec tous les cas possibles 
-    %(dépend du type de bord sur lequel on se trouve)
+    %(dÈpend du type de bord sur lequel on se trouve)
     elseif type_c == 2
         if type_left == 0
             v = (f_right - f_c)/h;
