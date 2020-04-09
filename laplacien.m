@@ -1,4 +1,4 @@
-function psi = laplacien(dom, num, cl)
+function stream = laplacien(dom, num, cl)
 % Resout entierement le Laplacien.
 %
 % Entree :
@@ -8,7 +8,7 @@ function psi = laplacien(dom, num, cl)
 %   * cl   : Matrice avec la condition limite eventuelle de chaque noeud.
 %
 % Sortie :
-%   * psi  : Solution du Laplacien. Matrice qui contient la valeur de la
+%   * stream : Solution du Laplacien. Matrice qui contient la valeur de la
 %            fonction de courant a chaque noeud (i, j) dans le domaine.
 
 nodes_nbr = max(max(num)); % Nombre de noeuds. Simplement le max de num.
@@ -31,15 +31,16 @@ for i = 1 : height % lignes
         end
         
         num_left = num(i-1, j);
-        num_right = num(i-1, j);
-        num_down = num(i-1, j);
-        num_up = num(i-1, j);
+        num_right = num(i+1, j);
+        num_down = num(i, j-1);
+        num_up = num(i, j+1);
         num_cent = num(i, j);
         type_cent = dom(i, j);
         cl_cent = cl(i, j);
         
-        [new_cols, new_coeffs, new_b] = getCoeff(num_left, num_right, num_down, num_up, num_cent, type_cent, cl_cent);
-        
+        [new_cols, new_coeffs, new_b] = getCoeff(num_left, num_right, ...
+            num_down, num_up, num_cent, type_cent, cl_cent);
+
         rows = [rows; repmat(num_cent, size(new_cols, 1), 1)];
         cols = [cols; new_cols];
         coeffs = [coeffs; new_coeffs];
@@ -51,7 +52,7 @@ for i = 1 : height % lignes
     end
 end
 
-% Matrice de cofficients des noeuds.
+% Matrice de coefficients des noeuds.
 A = sparse(rows, cols, coeffs, nodes_nbr, nodes_nbr);
 % Termes independants (vecteur colonne).
 b = sparse(b_indices, ones(size(b_val, 1), 1), b_val, nodes_nbr, 1);
@@ -62,11 +63,11 @@ vec_psi = A \ b;
 
 % Convertir vec_psi en matrice du domaine avec la valeur de psi à chaque
 % noeud.
-psi = NaN(height, width); % NaN pour les noeuds 0.
+stream = NaN(height, width); % NaN pour les noeuds 0.
 for i = 1 : height
     for j = 1 : width
         if dom(i, j) ~= 0
-            psi(i, j) = vec_psi(num(i, j));
+            stream(i, j) = vec_psi(num(i, j));
         end
     end
 end

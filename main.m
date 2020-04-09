@@ -1,4 +1,4 @@
-function main(which)
+function [stream, speed, press, h] = main(which)
 % Charge les donnees et realise les differents calculs.
 %
 % Parametres :
@@ -20,8 +20,10 @@ dom = dlmread(strcat(num2str(which), '-dom.txt'), '\t');
 num = dlmread(strcat(num2str(which), '-num.txt'), '\t');
 cl = dlmread(strcat(num2str(which), '-cl.txt'), '\t');
 
-psi = laplacien(dom, num, cl);
-
-% a faire...
-
+% Fonction de courant
+stream = laplacien(dom, num, cl);
+% Vitesse
+[u, v, speed] = velocity(stream, dom, h);
+% Pression
+press = pressure(u, v, dom, 0);
 end 

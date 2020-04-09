@@ -12,7 +12,7 @@ speed=NaN(m,n);
 
 for i=1:m
     for j=1:n
-        if(dom(i,j)== 1||2)
+        if dom(i,j) ~= 0  
             % On utilise la fonction deriv car u = d(psi)/dy
             % Et v = -d(psi)/dx
             u(i,j) = deriv (psi(i,j-1), psi(i,j), psi(i,j+1), dom(i,j-1), dom(i,j), dom(i,j+1), h);
