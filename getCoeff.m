@@ -1,18 +1,18 @@
 function [j, a, b] = getCoeff(num_left, num_right, num_down, num_up, num_cent, type_cent, cl_cent)
 % Paramètres :
-%   num_xxx : le numéro du n?ud xxx
+%   num_xxx : le numero du noeud xxx
 %   type_cent : le type de maille centrale : 0 = hors domaine de calcul, 
-%                                            1 = n?ud de calcul entouré de
-%                                                n?uds de calcul ou
+%                                            1 = noeud de calcul entoure de
+%                                                noeuds de calcul ou
 %                                                condition limite
-%                                            2 = n?ud condition limite de
+%                                            2 = noeud condition limite de
 %                                                Dirichlet
-%   cl_cent : l'éventuelle valeur de condition limite à prendre par ce
-%             n?ud
+%   cl_cent : l'eventuelle valeur de condition limite à prendre par ce
+%             noeud
 %
-% Renvoie :
-%   a : le vecteur colonne de coefficients (non nuls) de l'équation du n?ud
-%       central dans le système linéaire à résoudre
+% Sortie :
+%   a : le vecteur colonne de coefficients (~= 0) de l'équation du noeud
+%       central dans le systeme lineaire a resoudre
 %   j : le vecteur colonne contenant les numéros de colonnes des
 %       coefficients contenus dans a
 %   b : b la valeur du terme de droite de l'équation.
@@ -24,14 +24,14 @@ function [j, a, b] = getCoeff(num_left, num_right, num_down, num_up, num_cent, t
         b = 0;
     end
 
-    % N?ud de calcul.
+    % Noeud de calcul.
     if type_cent == 1
         a = [1; 1; 1; 1; -4];
         j = [num_right; num_left; num_up; num_down; num_cent];
         b = 0;
     end
 
-    % N?ud de condition limite de Dirichlet.
+    % Noeud de condition limite de Dirichlet.
     if type_cent == 2
         a = 1;
         j = num_cent;

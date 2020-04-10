@@ -1,4 +1,4 @@
-function [stream, speed, press, h] = main(which)
+function [stream, u, v, press, dom, h] = main(which)
 % Charge les donnees et realise les differents calculs.
 %
 % Parametres :
@@ -25,5 +25,5 @@ stream = laplacien(dom, num, cl);
 % Vitesse
 [u, v, speed] = velocity(stream, dom, h);
 % Pression
-press = pressure(u, v, dom, 0);
+press = pressure(speed, dom, 0);
 end 

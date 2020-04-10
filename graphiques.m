@@ -1,5 +1,5 @@
 function graphiques(which)
-[stream, speed, press, h] = main(which);
+[stream, speed, press, ~, h] = main(which);
 
 % Grille des coordonnées pour dessiner en mètres
 [X, Y] = meshgrid(0:h:((size(stream, 1) - 1) * h), 0:h:((size(stream, 2) - 1) * h));
@@ -32,9 +32,11 @@ c.Label.String = 'Vitesse';
 colormap jet
 hold off
 
+press_t = press';
+press_t(stream' <= 0.25) = NaN;
 % Plot pression
 figure(2);
-pcolor(X, Y, press');
+pcolor(X, Y, press_t);
 hold on
 title('Pression', 'interpreter', 'latex');
 xlabel('Distance Horizontale (m)', 'interpreter', 'latex');
@@ -43,6 +45,6 @@ grid off
 shading interp
 c = colorbar('eastoutside');
 c.Label.String = 'Pression';
-colormap jet
+colormap winter
 hold off
 end

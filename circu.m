@@ -15,6 +15,6 @@ function c=circu(u,v,x,y)
 % Produit scalaire u * dy = 0 car u selon e_x. Pareil pour v * dx.
 % On intègre alors u sur les x et v sur les y, et on additionne.
 
-c = trapz(x, u) + trapz(y, v);
+    c = trapz(x, u) + trapz(y, v);
 
 end

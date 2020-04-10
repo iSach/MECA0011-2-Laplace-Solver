@@ -1,10 +1,11 @@
 function [fx,fy] = force(p,x,y)
-% Entr»es : p = vecteur colonne des pressions
-%          x = vecteur colonne des coordonn»es x 
-%          y = vecteur colonne des coordonn»es y 
-% Sortie : fx et fy = force par unit» d'»paisseur selon x et y
+% Entrees : p = vecteur colonne des pressions
+%           x = vecteur colonne des coordonnees x 
+%           y = vecteur colonne des coordonnees y 
+%
+% Sortie : fx et fy = force par unite d'epaisseur selon x et y
 
-fx = trapz(x,p);
-fy = trapz(y,p);
+    fx = trapz(x,p);
+    fy = trapz(y,p);
 
 end

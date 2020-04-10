@@ -1,6 +1,5 @@
-function p = pressure(u, v, dom, C)
-% Entrées : u = vecteur des composantes horizontales de vitesse
-%           v = vecteur des composantes verticales de vitesse
+function p = pressure(speed, dom, C)
+% Entrées : speed = résultante des composantes de vitesse hor. et vert.
 %           dom = matrice sur laquelle on travaille
 %           C = constante à fixer arbitrairement
 
@@ -17,8 +16,7 @@ function p = pressure(u, v, dom, C)
     % Calcul des fonctions pour chaque noeud 
     for i = 1:nb_rows
         for j = 1:nb_columns
-            velocity = sqrt((u(i,j))^2 + (v(i,j)^2));
-            p(i,j) = rho*g *(C - (velocity^2)/(2*g));
+            p(i,j) = rho * g * (C - ((speed(i, j))^2) / (2 * g));
         end
     end
 end

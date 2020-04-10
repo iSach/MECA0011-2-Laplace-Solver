@@ -1,4 +1,4 @@
-[stream, speed, press, h] = main(2);
+[stream, speed, press, dom, h] = main(2);
 
 % Grille des coordonnées pour dessiner en mètres
 [X, Y] = meshgrid(0:h:((size(stream, 1) - 1) * h), 0:h:((size(stream, 2) - 1) * h)); 
@@ -29,9 +29,15 @@ prandtl_contour(prandtl_contour > 0.265) = NaN;
 % hold off
 
 % Plot isobare.
+pression = press';
+pression(stream_t <= 0.25) = NaN;
+
 figure(3);
-contour(X, Y, press');
+v = [-8000, -8000]
+contour(X, Y, pression, v);
 hold on
+c = colorbar('eastoutside');
+c.Label.String = 'Fonction de Courant';
 contour(X, Y, prandtl_contour, 1, 'red');
 title('Isobare et Tube de Prandtl', 'interpreter', 'latex');
 xlabel('Distance Horizontale (m)', 'interpreter', 'latex');
