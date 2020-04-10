@@ -1,4 +1,4 @@
-function [ trainee portance ] = trainee_portance( p, delta )
+function [ trainee, portance ] = trainee_portance( p, delta )
     %Calcul de la r?sultante des force sur chaque face.
     %Les nombres sont les coordonn?es des sommets de l'ilots
     Fsup = sum(p(91,17:37) * delta);

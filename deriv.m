@@ -24,7 +24,7 @@ function v = deriv(f_left, f_c, f_right, type_left, type_c, type_right, h)
         elseif type_right == 0
             v = (f_c - f_left)/h;
         else
-            v = (f_left-f_right)/(2*h);
+            v = (f_right-f_left)/(2*h);
         end
     end
                        

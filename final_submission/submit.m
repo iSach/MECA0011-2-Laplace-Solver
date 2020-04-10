@@ -168,10 +168,12 @@ function [u, v, speed] = velocity(psi,dom,h)
                 % Et v = -d(psi)/dx
                 u(i,j) = deriv (psi(i,j-1), psi(i,j), psi(i,j+1), ...
                     dom(i,j-1), dom(i,j), dom(i,j+1), h);
+
                 v(i,j) = -deriv (psi(i-1,j), psi(i,j), psi(i+1,j), ...
                     dom(i-1,j), dom(i,j), dom(i+1,j), h);
+
                 speed(i,j) = sqrt((u(i,j)^2 + v(i,j)^2));
-            end 
+            end
         end
     end
 end
@@ -187,7 +189,7 @@ function v = deriv(f_left, f_c, f_right, type_left, type_c, type_right, h)
     
     % Hors dommaine de calcul 
     if type_c == 0
-        v = 0;
+        v = NaN;
     
     % Noeud de calcul
     elseif type_c == 1
@@ -202,7 +204,7 @@ function v = deriv(f_left, f_c, f_right, type_left, type_c, type_right, h)
         elseif type_right == 0
             v = (f_c - f_left)/h;
         else
-            v = (f_left-f_right)/(2*h);
+            v = (f_right-f_left)/(2*h);
         end
     end   
 end
